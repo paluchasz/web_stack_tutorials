@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>My Heading</h1>
+<hr>
+<h2>This is a smaller heading</h2>
+<p style="color:red">This is my paragraph</p>
+<a href = "http://www.google.com">This is a link</a>
+<!--The '<>' are called tags, 'href' is an example of an attribute which are usually
+written in the opening tag-->
+
+<p>JavaScript can change the content of an HTML element:</p>
+<button type="button" onclick="myFunction()">Click Me!</button>
+
+<p id="demo">This is a demonstration.</p>
+
+<script>
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "Hello JavaScript!";
+    }
+</script>
+
+</body>
+</html>
