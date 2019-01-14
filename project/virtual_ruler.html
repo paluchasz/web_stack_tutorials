@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Virtual Ruler</title>
-    </head>
-    <body>
-        <h2>
-            Welcome to my page!
-        </h2>
-    </body>
+<head>
+    <title>Virtual Ruler</title>
+    <link rel="stylesheet" type="text/css" href="vr_stylesheet.css">
+</head>
+<body>
+<div id="container">
+    <div id="wrapper">
+        <div id="content">
+            <h2>
+                Welcome to my page!
+            </h2>
+            <p><strong>Content here.</strong></p>
+            <p>
+                A scanning electron microscope (SEM) is a type of electron microscope that produces images of a sample by scanning the
+                surface with a focused beam of electrons. The electrons interact with atoms in the sample, producing various signals
+                that contain information about the surface topography and composition of the sample. The electron beam is scanned in a
+                raster scan pattern, and the position of the beam is combined with the detected signal to produce an image. SEM can
+                achieve resolution better than 1 nanometer. Specimens are observed in high vacuum in conventional SEM, or in low vacuum
+                or wet conditions in variable pressure or environmental SEM, and at a wide range of cryogenic or elevated temperatures
+                with specialized instruments.
+            </p>
+            <img id="pollen" src="Misc_pollen.jpg" alt="Myself" style="width:60%;height:80%;">
+            <a href="https://en.wikipedia.org/wiki/Scanning_electron_microscope">Wikipedia</a>
+            
+
+            <canvas id="myCanvas" onclick="getCursorPosition(event)" width="500" height="500" style="border:1px solid #d3d3d3;"></canvas>
+            <script>
+                window.onload = function() {
+                    let c = document.getElementById("myCanvas");
+                    let ctx = c.getContext("2d")
+                    let img = document.getElementById("pollen");
+
+                    ctx.drawImage(img, 0, 0);
+                }    
+            </script>
+
+            <script>
+                function getCursorPosition(event) {
+                    var c = document.getElementById("myCanvas");
+                    var rect = c.getBoundingClientRect()
+                    var x = event.clientX - rect.left;
+                    var y = event.clientY - rect.top;
+                    console.log("x: " + x + " y: " + y); 
+                    // console.log(event.clientX, rect.left, event.clientY, rect.top)
+                    // event.clientX and event.clientY output the horizontal, x and vertical, y components
+                    // of the mouse pointer (always referenced to the top left corner of page which is (0,0))
+                    // The rect.left and rect.top give the x/y coordinates of left and top side of rect
+                    // respectively. Hence if we scroll up or down the rect.top changes
+                    // uncomment above to see 
+                }
+            </script>
+            
+
+        </div>
+    </div>
+</div>
+</body>
 </html>
