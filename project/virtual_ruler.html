@@ -25,11 +25,12 @@
             <a href="https://en.wikipedia.org/wiki/Scanning_electron_microscope">Wikipedia</a>
             
 
-            <canvas id="myCanvas" onclick="getCursorPosition(event)" width="500" height="500" style="border:1px solid #d3d3d3;"></canvas>
+            <canvas id="myCanvas" onclick="getCursorPosition(event)" oncontextmenu="getCursorPosition(event)" 
+            width="500" height="500" style="border:1px solid #d3d3d3;"></canvas>
             <script>
                 window.onload = function() {
                     let c = document.getElementById("myCanvas");
-                    let ctx = c.getContext("2d")
+                    let ctx = c.getContext("2d");
                     let img = document.getElementById("pollen");
 
                     ctx.drawImage(img, 0, 0);
@@ -37,19 +38,38 @@
             </script>
 
             <script>
+                let init_coord = []
+                let fin_coord = []
+
                 function getCursorPosition(event) {
-                    var c = document.getElementById("myCanvas");
-                    var rect = c.getBoundingClientRect()
-                    var x = event.clientX - rect.left;
-                    var y = event.clientY - rect.top;
-                    console.log("x: " + x + " y: " + y); 
+                    
+                    let c = document.getElementById("myCanvas");
+                    let rect = c.getBoundingClientRect();
+                    // Return the size of an element and its position relative to the viewport
+                    let x = event.clientX - rect.left;
+                    let y = event.clientY - rect.top;
+                    console.log("x: " + x + " y: " + y);
+                    
                     // console.log(event.clientX, rect.left, event.clientY, rect.top)
                     // event.clientX and event.clientY output the horizontal, x and vertical, y components
                     // of the mouse pointer (always referenced to the top left corner of page which is (0,0))
                     // The rect.left and rect.top give the x/y coordinates of left and top side of rect
                     // respectively. Hence if we scroll up or down the rect.top changes
                     // uncomment above to see 
+
+                    if (event.type === "click") {
+                        init_coord = [x, y];
+                        console.log("hello", init_coord);
+                    }
+
+                    if (event.type === "contextmenu"){
+                        fin_coord = [x, y];
+                        distance = Math.sqrt((fin_coord[0] - init_coord[0])**2 
+                        + (fin_coord[1] - init_coord[1])**2);
+                        console.log(distance, fin_coord);
+                    }
                 }
+
             </script>
             
 
