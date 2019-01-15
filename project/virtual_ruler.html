@@ -20,21 +20,29 @@
                 achieve resolution better than 1 nanometer. Specimens are observed in high vacuum in conventional SEM, or in low vacuum
                 or wet conditions in variable pressure or environmental SEM, and at a wide range of cryogenic or elevated temperatures
                 with specialized instruments.
+                <a href="https://en.wikipedia.org/wiki/Scanning_electron_microscope">Ref: Wikipedia</a>
             </p>
-            <img id="pollen" src="Misc_pollen.jpg" alt="Myself" style="width:60%;height:80%;">
-            <a href="https://en.wikipedia.org/wiki/Scanning_electron_microscope">Wikipedia</a>
             
 
             <canvas id="myCanvas" onclick="getCursorPosition(event)" oncontextmenu="getCursorPosition(event)" 
-            width="500" height="500" style="border:1px solid #d3d3d3;"></canvas>
+            width="700" height="500" style="border:1px solid #d3d3d3;"></canvas>
+            
             <script>
-                window.onload = function() {
-                    let c = document.getElementById("myCanvas");
-                    let ctx = c.getContext("2d");
-                    let img = document.getElementById("pollen");
+                let c = document.getElementById("myCanvas");
+                let ctx = c.getContext("2d");
+                loadImg();
 
-                    ctx.drawImage(img, 0, 0);
-                }    
+                function loadImg() {
+
+                    let img1 = new Image();
+
+                    img1.onload = function () {
+                        ctx.drawImage(img1, 0, 0);
+                    }
+
+                    img1.src = "/home/paluchasz/web_stack_tutorials/project/Misc_pollen.jpg";   
+                }
+
             </script>
 
             <script>
@@ -48,7 +56,6 @@
                     // Return the size of an element and its position relative to the viewport
                     let x = event.clientX - rect.left;
                     let y = event.clientY - rect.top;
-                    console.log("x: " + x + " y: " + y);
                     
                     // console.log(event.clientX, rect.left, event.clientY, rect.top)
                     // event.clientX and event.clientY output the horizontal, x and vertical, y components
