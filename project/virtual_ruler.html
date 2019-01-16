@@ -23,74 +23,15 @@
                 <a href="https://en.wikipedia.org/wiki/Scanning_electron_microscope">Ref: Wikipedia</a>
             </p>
             
+            <p id="coordinate">Coordinate:</p>
 
-            <canvas id="myCanvas" onclick="getCursorPosition(event)" 
+            <canvas id="myCanvas" onclick="getLength(event)" onmousemove="getCoordinate(event)"
             width="700" height="500" style="border:1px solid #d3d3d3;"></canvas>
 
-            <p id="coordinates">Click on two points to find the length of the segment between them. </p>
+            <p id="distance">Click on two points to find the length of the segment between them. </p>
             
-            <script>
-                let c = document.getElementById("myCanvas");
-                let ctx = c.getContext("2d"); //ctx stands for context
-                loadImg();
+            <script src="virtural_ruler.js"></script>
 
-                function loadImg() {
-
-                    let img1 = new Image();
-
-                    img1.onload = function () {
-                        ctx.drawImage(img1, 0, 0);
-                    }
-
-                    img1.src = "/home/paluchasz/web_stack_tutorials/project/Misc_pollen.jpg";   
-                }
-
-            </script>
-
-            <script>
-                let init_coord = [];
-                let fin_coord = [];
-                let first_click = true;
-
-                function getCursorPosition(event) {
-                    
-                    let c = document.getElementById("myCanvas");
-                    let rect = c.getBoundingClientRect();
-                    // Return the size of an element and its position relative to the viewport
-                    let x = event.clientX - rect.left;
-                    let y = event.clientY - rect.top;
-                    
-                    // console.log(event.clientX, rect.left, event.clientY, rect.top)
-                    // event.clientX and event.clientY output the horizontal, x and vertical, y components
-                    // of the mouse pointer (always referenced to the top left corner of page which is (0,0))
-                    // The rect.left and rect.top give the x/y coordinates of left and top side of rect
-                    // respectively. Hence if we scroll up or down the rect.top changes
-                    // uncomment above to see 
-
-                    if (first_click) {
-                        init_coord = [x, y];
-                        first_click = false;
-                        document.getElementById("coordinates").innerHTML = "Selected point" 
-                        + " has coordinates " + init_coord + ". Now click for the second point.";
-                        console.log(init_coord);
-                        return; //to make sure once we assign first_click to false it doesn't 
-                        // immediately go to the else clause 
-                    }
-
-                    else {
-                        fin_coord = [x, y];
-                        distance = Math.sqrt((fin_coord[0] - init_coord[0])**2 
-                        + (fin_coord[1] - init_coord[1])**2);
-                        first_click = true;
-                        document.getElementById("coordinates").innerHTML = "Selected point"
-                            + " has coordinates " + fin_coord + ". The length of the segment is " 
-                            + distance.toFixed(2) + ". Click again to measure another segment!";
-                        console.log(distance, fin_coord);
-                    }
-                }
-
-            </script>
-            
 
         </div>
     </div>
