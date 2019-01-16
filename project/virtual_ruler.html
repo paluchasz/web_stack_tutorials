@@ -24,8 +24,10 @@
             </p>
             
 
-            <canvas id="myCanvas" onclick="getCursorPosition(event)" oncontextmenu="getCursorPosition(event)" 
+            <canvas id="myCanvas" onclick="getCursorPosition(event)" 
             width="700" height="500" style="border:1px solid #d3d3d3;"></canvas>
+
+            <p id="coordinates">Click on two points to find the length of the segment between them. </p>
             
             <script>
                 let c = document.getElementById("myCanvas");
@@ -68,6 +70,8 @@
                     if (first_click) {
                         init_coord = [x, y];
                         first_click = false;
+                        document.getElementById("coordinates").innerHTML = "Selected point" 
+                        + " has coordinates " + init_coord + ". Now click for the second point.";
                         console.log(init_coord);
                         return; //to make sure once we assign first_click to false it doesn't 
                         // immediately go to the else clause 
@@ -78,6 +82,9 @@
                         distance = Math.sqrt((fin_coord[0] - init_coord[0])**2 
                         + (fin_coord[1] - init_coord[1])**2);
                         first_click = true;
+                        document.getElementById("coordinates").innerHTML = "Selected point"
+                            + " has coordinates " + fin_coord + ". The length of the segment is " 
+                            + distance.toFixed(2) + ". Click again to measure another segment!";
                         console.log(distance, fin_coord);
                     }
                 }
