@@ -29,7 +29,7 @@
             
             <script>
                 let c = document.getElementById("myCanvas");
-                let ctx = c.getContext("2d");
+                let ctx = c.getContext("2d"); //ctx stands for context
                 loadImg();
 
                 function loadImg() {
@@ -46,8 +46,9 @@
             </script>
 
             <script>
-                let init_coord = []
-                let fin_coord = []
+                let init_coord = [];
+                let fin_coord = [];
+                let first_click = true;
 
                 function getCursorPosition(event) {
                     
@@ -64,15 +65,19 @@
                     // respectively. Hence if we scroll up or down the rect.top changes
                     // uncomment above to see 
 
-                    if (event.type === "click") {
+                    if (first_click) {
                         init_coord = [x, y];
-                        console.log("hello", init_coord);
+                        first_click = false;
+                        console.log(init_coord);
+                        return; //to make sure once we assign first_click to false it doesn't 
+                        // immediately go to the else clause 
                     }
 
-                    if (event.type === "contextmenu"){
+                    else {
                         fin_coord = [x, y];
                         distance = Math.sqrt((fin_coord[0] - init_coord[0])**2 
                         + (fin_coord[1] - init_coord[1])**2);
+                        first_click = true;
                         console.log(distance, fin_coord);
                     }
                 }
